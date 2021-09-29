@@ -8,6 +8,8 @@ https://kbove.github.io/Week-02-HW4-Quiz-KB/
 
 
 ### Screenshot
+![Quiz Screenshot](https://user-images.githubusercontent.com/89953218/135360812-103ac15e-320a-46cd-9e22-95557c6d3552.JPG)
+
 
 
 ---
