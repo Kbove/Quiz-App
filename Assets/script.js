@@ -12,17 +12,19 @@
 //When page loads, pull up the high score list (function)
 
 var timerElement = document.querySelector(".timer-count");
-var rsBtn = document.querySelector(".reset-button");
+const rsBtn = document.querySelector(".reset-button");
 const startBtn = document.querySelector(".start-button");
 var currentQuestion = document.querySelector("#question")
+var gameScore = document.querySelector(".current-score")
 let answers = document.getElementById('answers');
 
-
+//ar scoresList = {}
+var questionIndex = 0
 
 var highScores = localStorage.getItem("highScores")
 
 
-const questionsIndex = [
+const questionsArray = [
     {
         question: "What is Joe's favorite catchphrase?",
         answers: [
@@ -52,13 +54,6 @@ const questionsIndex = [
             {choice: "13"},
         ],
         correct: "0"
-        /*question: "How many blue stripes are on the American flag?",
-        answers: [
-            {choice: "7", correct: false},
-            {choice: "6", correct: false},
-            {choice: "0", correct: true},
-            {choice: "13", correct: false},
-        ]*/
     },
     {
         question: "Which of these characters is not friends with Harry Potter?",
@@ -69,13 +64,6 @@ const questionsIndex = [
             {choice: "Draco Malfoy"},
         ],
         correct: "Draco Malfoy"
-        /*question: "Which of these characters is not friends with Harry Potter?",
-        answers: [
-            {choice: "Ron Weasley", correct: false},
-            {choice: "Neville Longbottom", correct: false},
-            {choice: "Hermione Granger", correct: false},
-            {choice: "Draco Malfoy", correct: true},
-        ]*/
     },
     {
         question: "Which planet is the hottest?",
@@ -89,22 +77,21 @@ const questionsIndex = [
     },
 ]
 
-var timer;
-var timerCount;
-
 //Loads up list of high scores and initials upon page load
-function highscores(){
+//function getHighscores(){
+    //score[scoresList]
+    //localStorage.setItem.JSON.stringify("scores",scoresList);
+//}
 
-}
+
+
 
 //starts timer and render questions functions
 function startGame() {
     startBtn.style.display = "none"
     timerCount = 60;
     score = 0
-    shuffledIndex = questionsIndex.sort(()=>Math.random() - .5)
-    console.log(shuffledIndex)
-    currentQuestion.textContent = shuffledIndex[0].question
+    console.log(questionIndex)
     displayAnswers();
     startTimer();
 }
@@ -114,19 +101,21 @@ function startTimer(){
     timer = setInterval(function(){
         timerCount--;
         timerElement.textContent = timerCount;
-        if (timerCount === 0) {
+        if (timerCount < 0) {
+            timer.textContent === 0;
+            answers.innerHTML = ""
+            currentQuestion.textContent = "Game Over"
             clearInterval(timer);
             gameover();
         }
     }, 1000);
 }
 
-/*function nextQuestion (){
-    resetState(e)
-    displayQuestion(shuffQuest[currQuest])
-}*/
 function displayAnswers(){
-    var ansArr = shuffledIndex[0].answers;
+    answers.innerHTML = ""
+    currentQuestion.textContent = ""
+    currentQuestion.textContent = questionsArray[questionIndex].question
+    var ansArr = questionsArray[questionIndex].answers;
     ansArr.forEach(element => {
         let choice = element.choice;
         ans = document.createElement('LI');
@@ -136,172 +125,43 @@ function displayAnswers(){
         ans.appendChild(but);
         answers.appendChild(ans);
 
-        ans.addEventListener('click', function selectAnswer(event){          
-            checkAnswer(event);
-        })
+        ans.addEventListener('click', checkAnswer)
     }
     )
 }
 
 function checkAnswer(event){
-    if (event.target.textContent === shuffledIndex[0].correct){
+    if (event.target.textContent === questionsArray[questionIndex].correct){
     alert("great job!");
     score++
-    nextQuestion1();
+    questionIndex++
+    displayAnswers();
     } else {
     alert("WRONG")
-    timerCount -= 30
-    nextQuestion1();
-    } 
-}
-
-function nextQuestion1(){
-    currentQuestion.textContent = shuffledIndex[1].question
-    var ansArr = shuffledIndex[1].answers;
-    ansArr.forEach(element => {
-        let choice = element.choice;
-        ans = document.createElement('LI');
-        but = document.createElement('button');
-        but.textContent = choice;
-
-        ans.appendChild(but);
-        answers.appendChild(ans);
-
-        ans.addEventListener('click', function selectAnswer1(event){
-            checkAnswer1(event);
-            
-        })
-    }
-    )
-}
-
-function checkAnswer1(event){
-    if (event.target.textContent === shuffledIndex[1].correct){
-    alert("great job!");
-    score++
-    nextQuestion2();
-    } else {
-    alert("WRONG")
-    timerCount -= 30
-    nextQuestion2();
-    } 
-}
-
-function nextQuestion2(){
-    currentQuestion.textContent = shuffledIndex[2].question
-    var ansArr = shuffledIndex[2].answers;
-    ansArr.forEach(element => {
-        let choice = element.choice;
-        ans = document.createElement('LI');
-        but = document.createElement('button');
-        but.textContent = choice;
-
-        ans.appendChild(but);
-        answers.appendChild(ans);
-
-        ans.addEventListener('click', function selectAnswer2(event){
-            checkAnswer2(event);
-            
-        })
-    }
-    )
-}
-
-function checkAnswer2(event){
-    if (event.target.textContent === shuffledIndex[2].correct){
-    alert("great job!");
-    score++
-    nextQuestion3();
-    } else {
-    alert("WRONG")
-    timerCount -= 30
-    nextQuestion3();
-    } 
-}
-
-function nextQuestion3(){
-    currentQuestion.textContent = shuffledIndex[3].question
-    var ansArr = shuffledIndex[3].answers;
-    ansArr.forEach(element => {
-        let choice = element.choice;
-        ans = document.createElement('LI');
-        but = document.createElement('button');
-        but.textContent = choice;
-
-        ans.appendChild(but);
-        answers.appendChild(ans);
-
-        ans.addEventListener('click', function selectAnswer2(event){
-            checkAnswer3(event);
-            
-        })
-    }
-    )
-}
-
-function checkAnswer3(event){
-    if (event.target.textContent === shuffledIndex[3].correct){
-    alert("great job!");
-    score++
-    nextQuestion4();
-    } else {
-    alert("WRONG")
-    timerCount -= 30
-    nextQuestion4();
-    } 
-}
-
-function nextQuestion4(){
-    currentQuestion.textContent = shuffledIndex[4].question
-    var ansArr = shuffledIndex[4].answers;
-    ansArr.forEach(element => {
-        let choice = element.choice;
-        ans = document.createElement('LI');
-        but = document.createElement('button');
-        but.textContent = choice;
-
-        ans.appendChild(but);
-        answers.appendChild(ans);
-
-        ans.addEventListener('click', function selectAnswer2(event){
-            checkAnswer4(event);
-            
-        })
-    }
-    )
-}
-
-function checkAnswer4(event){
-    if (event.target.textContent === shuffledIndex[4].correct){
-    alert("great job!");
-    score++
-    gameOver();
-    } else {
-    alert("WRONG")
-    timerCount -= 30
-    gameOver();
+    timerCount -= 10
+    questionIndex++
+    displayAnswers();
     } 
 }
 
 function gameOver(){
-    var lastChoices = document.querySelector("#answers");
-    lastChoices.style.display="none"
-    clearInterval(timer);
-    localStorage.setItem("score",score);
-
+    if (timerCount < 0){
+        timerElement.textContent = ""
+        clearInterval(timer);
+    }
+    answers.innerHTML = ""
+    currentQuestion.textContent = "Game Over"
+    setHighscores();
 }
-/*for (i = 0; i < ansArr.length; i++){
-        choicesBtn.textContent = 
-    }*/
-
-/*function resetState() {
     
+/*setHighscores(){
+    score[scoresList]
+    localStorage.setItem.JSON.stringify("scores",scoresList);
+
+    var newScore = document.createElement("li")
 }*/
-
-
-
-/*choicesBtn.addEventListener("click", function(){
-})*/
-
 startBtn.addEventListener("click", startGame)
-
+rsBtn.addEventListener('click', function(){
+    startGame();
+})
+//in order to store initials and scores, build and object and stringify it
