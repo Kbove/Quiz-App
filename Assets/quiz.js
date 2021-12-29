@@ -19,14 +19,24 @@ var gameScore = document.querySelector(".current-score")
 let answers = document.getElementById('answers');
 var highScoreCont = document.getElementById('#high-scores')
 let scoreObjArr = []
-
+let gameScores;
 var questionIndex = 0
 let questionCount = 0
 
-var gameScores = (localStorage.getItem("highscores")).split(',').slice(0,-1)
-console.log('gamescores', gameScores)
+function getScores() {
+    if (localStorage.getItem('highscores') === null){
+        return
+    } else if (localStorage.getItem('highscores') === undefined) {
+        return
+    } else {
+        let gameScores = (localStorage.getItem("highscores")).split(',').slice(0,-1)
+        console.log(gameScores)
+        sortScores(gameScores)
+    }
+} 
+getScores()
 
-function sortScores() {
+function sortScores(gameScores) {
     for (let i = 0; i < gameScores.length; i++) {
         let scoreArr = gameScores[i].split(':')
         let name = scoreArr[0]
@@ -40,11 +50,11 @@ function sortScores() {
         return b.score - a.score
     })
     console.log('score obj array', scoreObjArr)
+    displayScores()
 }
-sortScores()
 
 function displayScores() {
-    for (let i = 0; i < 9; i++) {
+    for (let i = 0; i < scoreObjArr.length; i++) {
         let scoreList = document.getElementById('high-scores')
         let newScore = document.createElement('li')
         newScore.setAttribute('style', 'list-style-type:none')
@@ -52,7 +62,6 @@ function displayScores() {
         scoreList.appendChild(newScore)
     }
 }
-displayScores()
 
 const questionsArray = [
     {
@@ -189,11 +198,14 @@ function gameOver() {
 }
 
 function submitNewScore(newScore) {
+    let gameScores = localStorage.getItem("highscores")
     let scoreList = document.getElementById('newName').value + ":" + newScore + ","
     if (gameScores === null) {
-        localStorage.setItem('scores', scoreList)
+        localStorage.setItem('highscores', scoreList)
+    } else if (gameScores === undefined) {
+        localStorage.setItem('highscores', scoreList)
     } else {
-    localStorage.setItem('scores', scoreList+gameScores)
+        localStorage.setItem('highscores', scoreList+gameScores)
     }
 }
 
