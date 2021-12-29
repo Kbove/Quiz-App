@@ -1,16 +1,3 @@
-//When start button is pressed
-//start timer (function)
-//display random question (function)
-//If question is answered correctly, clear display and render new random question
-//If question answered incorrectly, subtract 10 seconds from timer, render new question
-//CAN'T RENDER SAME QUESTION TWICE IN ONE GAME (figure it out)
-//Log each correct answer for current game and store in variable
-//When all questions are answered or timer runs out, game ends
-//input initials and then display on "high score" section to the side
-//Sort and display high score/initials in descending order, 10 total
-//If quit/reset is pressed before the game ends, start the game function over and do not prompt for initials
-//When page loads, pull up the high score list (function)
-
 var timerElement = document.querySelector(".timer-count");
 const rsBtn = document.querySelector(".reset-button");
 const startBtn = document.querySelector(".start-button");

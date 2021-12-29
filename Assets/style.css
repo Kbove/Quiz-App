@@ -1,0 +1,49 @@
+h1 {
+    color: crimson;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.start-button {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin: 0 auto;
+}
+
+.reset-button {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin: 0 auto;
+}
+
+.rules {
+    text-align: center;
+    justify-content: center;
+    display: block;
+    margin: 0 auto;
+}
+
+.game-container {
+    text-align: center;
+    justify-content: center;
+    display: block;
+    margin: 0 auto;
+}
+
+.card-timer {
+    text-align: center;
+    justify-content: center;
+    display: block;
+    margin: 0 auto;
+}
+
+.score-container {
+    text-align: center;
+    justify-content: center;
+    display: block;
+    margin: 0 auto;
+}
+
