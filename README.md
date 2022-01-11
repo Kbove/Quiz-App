@@ -1,7 +1,7 @@
 # Quiz App
 
 ## Description 
-A timed quiz with various trivia questions. Unfortunately I wasn't able to do everything I wanted to get it to do, but it will cycle through various questions as you select answers from a multiple choice layout. If an answer is wrong, you lose 10 seconds off the timer. when the time expires the questions disappear and you get the gameover message. One correct answer is one point and it keeps track as you go. I learned a lot from this. I will definitely need to review how to store stuff in local storage.
+A timed quiz with various trivia questions. Each question is presented with four multiple choice answers. Each correct answer grants the user a point, and each incorrect answer shaves 10 seconds off the time. Scores are saved in local storage and rendered to the page in descending order along with user initials.
 
 ### link
 https://kbove.github.io/Week-02-HW4-Quiz-KB/
